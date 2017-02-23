@@ -69,4 +69,36 @@ Array.prototype.bSearch = function(value) {
 
 };
 
-console.log([0, 1,2,3,4,5,6,7,8,9].bSearch(0));
+// console.log([0, 1,2,3,4,5,6,7,8,9].bSearch(0));
+
+
+Array.prototype.mergeSort = function() {
+  if (this.length === 1 || this.length === 0) {
+    return this;
+  }
+  let middle = Math.floor(this.length/2);
+  let sortedLeft = this.slice(0, middle).mergeSort();
+  let sortedRight = this.slice(middle, this.length).mergeSort();
+
+  return merge(sortedLeft, sortedRight);
+};
+
+function merge(array1, array2) {
+  let merged = [];
+  // console.log(array1);
+  // console.log(array2);
+
+  while (array1.length !== 0 && array2.length !== 0) {
+    if (array1[0] > array2[0]) {
+      merged.push(array2.shift());
+    }
+    else {
+      merged.push(array1.shift());
+    }
+  }
+
+  return merged.concat(array1).concat(array2);
+}
+
+console.log([3,2346,23,7,27,2,52].mergeSort());
+// console.log(merge([1,5,78], [10,11,490]));
